@@ -116,6 +116,7 @@ now -e LOCATIONS=SF,NYC car2go/erna
 ```
 
 or any other preferred way.  
+Since erna uses internal storage ensure that the app is scaled exactly once at a single datacenter.
 
 
 ## Development
