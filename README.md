@@ -18,6 +18,8 @@
 
 ---
 
+![demo](./assets/demo.gif)
+
 ## Introduction
 This [Slack](https://slack.com) [slash command](https://api.slack.com/slash-commands) is inspired by car2go's previous platform `luncher2go` which matches coworkers of one location on demand to get to know new colleagues while having lunch.
 
