@@ -39,9 +39,8 @@ Since erna uses internal storage ensure that the app is scaled exactly once at a
 ## Configuration
 The configuration is based on environment variables.
 
-- `LOCATIONS`
+### `LOCATIONS`
 
-The list of locations is required.  
 Pass in a comma-separated list of available locations.  
 Those locations are provided as interactive command, so people can choose their current location on a daily basis.  
 
@@ -61,20 +60,20 @@ LOCATIONS=#Europe/Berlin:Berlin,Hamburg#America/New_York:NYC
 
 If just one location is provided, erna skips the prompt for choosing the location as it is unnecessary. 
 
-- `TOKEN`
+### `TOKEN`
 
 The Slack OAuth token is required.  
-How to get the token and set the required permissions is explained in section [setup](#setup).
+How to get the token and set the required permissions is explained in section [Slack setup chapter](docs/slack-setup.md).
 
 Example:
 ```sh
 TOKEN=xoxp-12345678-87654321-10011001-3x4mp13
 ```
 
-- `PORT`
+### `[PORT=3000]`
 
 Pass in an integer to use a custom port.  
-The default port is `3000`.
+This variable is optional and its default is `3000`.
 
 Example:
 ```sh
