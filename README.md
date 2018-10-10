@@ -44,9 +44,8 @@ The configuration is based on environment variables.
 Pass in a comma-separated list of available locations.  
 Those locations are provided as interactive command, so people can choose their current location on a daily basis.  
 
-Besides the locations it is necessary to define the related [timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).  
-Each timezone is enclosed between `#` and `:`.  
-So the final schema is like:
+Besides the locations it is necessary to define the related [timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) ([map](http://efele.net/maps/tz/)).  
+Each timezone is enclosed between `#` and `:`. So the final schema is like:
 
 ```sh
 [#<Timezone>:<Location>[,<Location>*]]+
