@@ -29,7 +29,7 @@ The app is optimized for [zeit now](https://zeit.co/now), so that it is possible
 now -e LOCATIONS=SF,NYC car2go/erna
 ```
 
-The basic idea behind erna is to enter a specific command, choose your current location and get your match at 11:30am. In case of an odd number of applicants, there's one group of three people. Otherwise it is a 1on1. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
+The basic idea behind erna is to enter a specific command, choose your current location and get your match at 11:30am Europe/Berlin. In case of an odd number of applicants, there's one group of three people. Otherwise it is a 1on1. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
 
 It is still work in progress and uses internal storage.  
 Feel free to contribute new storage providers or other features.
