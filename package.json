@@ -1,0 +1,45 @@
+{
+  "name": "erna",
+  "version": "0.1.0",
+  "description": "slack slash command to match people for having lunch",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "standard"
+  },
+  "keywords": [
+    "slack",
+    "slash command",
+    "HR",
+    "team culture",
+    "social",
+    "fun",
+    "bot"
+  ],
+  "contributors": [
+    {
+      "name": "Felix Heck",
+      "email": "felix.heck@daimler.com",
+      "url": "https://whotheheck.de"
+    },
+    {
+      "name": "Sumit Kumar",
+      "email": "sumit.kumar@daimler.com",
+      "url": "https://raum.sh"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.3",
+    "node-cron": "^2.0.1"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  },
+  "engines": {
+    "node": ">= 7"
+  }
+}
