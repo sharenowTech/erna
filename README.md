@@ -41,11 +41,19 @@ Feel free to contribute new storage providers or other features.
 
 The list of locations is required.  
 Pass in a comma-separated list of available locations.  
-Those locations are provided as interactive command, so people can choose there current location on a daily basis.
+Those locations are provided as interactive command, so people can choose there current location on a daily basis.  
+
+Besides the locations it is necessary to define the related [timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).  
+Each timezone starts with a `#` and is prefixed with `:`.  
+So the final schema is like:
+
+```sh
+[#<CONTINENT/CITY>:<Location>[,<Location>*]]*
+```
 
 Example:
 ```sh
-LOCATIONS=Berlin,Stuttgart,Hamburg,Ulm
+LOCATIONS=#Europe/Berlin:Berlin,Hamburg#America/New_York:NYC
 ```
 
 If just one location is provided, erna skips the prompt for choosing the location as it is unnecessary. 
