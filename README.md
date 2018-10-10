@@ -26,7 +26,7 @@ This [Slack](https://slack.com) [slash command](https://api.slack.com/slash-comm
 The app is optimized for [zeit now](https://zeit.co/now), so that it is possible to deploy the app with a single command: 
 
 ```sh
-now -e LOCATIONS=SF,NYC car2go/erna
+now car2go/erna
 ```
 
 The basic idea behind erna is to enter a specific command, choose your current location and get your match at 11:30am Europe/Berlin. In case of an odd number of applicants, there's one group of three people. Otherwise it is a 1on1. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
@@ -39,6 +39,7 @@ Feel free to contribute new storage providers or other features.
 
 - `LOCATIONS`
 
+The list of locations is required.  
 Pass in a comma-separated list of available locations.  
 Those locations are provided as interactive command, so people can choose there current location on a daily basis.
 
@@ -47,7 +48,7 @@ Example:
 LOCATIONS=Berlin,Stuttgart,Hamburg,Ulm
 ```
 
-If no or just one location is provided, erna skips the prompt for choosing the location as it is unnecessary. 
+If just one location is provided, erna skips the prompt for choosing the location as it is unnecessary. 
 
 - `TOKEN`
 

@@ -1,7 +1,8 @@
 {
   "type": "npm",
   "env": [
-    "TOKEN"
+    "TOKEN",
+    "LOCATIONS"
   ]
 }
 
