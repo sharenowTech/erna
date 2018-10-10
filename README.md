@@ -1,3 +1,6 @@
+![logo](./assets/logo.gif)
+
+
 # erna – eat, relax & natter alternately
 ## slack slash command to match people for having lunch
 
