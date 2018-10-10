@@ -48,7 +48,8 @@ Each timezone starts with a `#` and is prefixed with `:`.
 So the final schema is like:
 
 ```sh
-[#<CONTINENT/CITY>:<Location>[,<Location>*]]*
+[#<Timezone>:<Location>[,<Location>*]]+
+[#<Continent/City>:<Location>[,<Location>*]]+
 ```
 
 Example:
