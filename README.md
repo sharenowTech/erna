@@ -11,6 +11,7 @@
 
 1. [Introduction](#introduction)
 1. [Configuration](#configuration)
+1. [Endpoints](#endpoints)
 1. [Setup](#setup)
 1. [Development](#development)
 1. [Contributing](#contributing)
@@ -78,6 +79,11 @@ Example:
 ```sh
 PORT=8080
 ```
+
+## Endpoints
+
+- `POST /` – Slash Command
+- `POST /folks` – Interactive Components
 
 ## Setup
 ### Slack App
