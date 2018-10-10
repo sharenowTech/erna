@@ -11,8 +11,8 @@
 
 1. [Introduction](#introduction)
 1. [Configuration](#configuration)
-1. [Endpoints](#endpoints)
-1. [Setup](#setup)
+1. [Endpoints and Permissions](#endpoints-and-permissions)
+1. [Setup Slack App ⇗](docs/slack-setup.md)
 1. [Development](#development)
 1. [Contributing](#contributing)
 1. [License](#license)
@@ -33,10 +33,11 @@ now car2go/erna
 The basic idea behind erna is to enter a specific command, choose your current location and get your match at 11:30am Europe/Berlin. In case of an odd number of applicants, there's one group of three people. Otherwise it is a 1on1. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
 
 It is still work in progress and uses internal storage.  
-Feel free to contribute new storage providers or other features.
+Feel free to contribute new storage providers or other features.  
+Since erna uses internal storage ensure that the app is scaled exactly once at a single datacenter.
 
 ## Configuration
-> The configuration is based on environment variables.
+The configuration is based on environment variables.
 
 - `LOCATIONS`
 
@@ -80,51 +81,14 @@ Example:
 PORT=8080
 ```
 
-## Endpoints
-
+## Endpoints and Permissions
+### Endpoints
 - `POST /` – Slash Command
 - `POST /folks` – Interactive Components
 
-## Setup
-### Slack App
-Create a Slack app ([here](https://api.slack.com/slack-apps)).  
-Assign a name and a workspace in the following steps.
-
-![create slack app](./assets/create-slack-app.png)
-
-After setting up the Slack app you have to add features like the slash command, interactive components and permissions.
-
-![add features and functionality](./assets/features.png)
-
-Start with the slash command, enter the root url of the future service and other options like the command name and a hint.
-
-![create slash command](./assets/command.png)
-
-Continue with the interactive components which enables to ask for the current location.  
-Extend the root url with the `/folks` path.
-
-![create interactive component](./assets/interactive.png)
-
-Finally grant the required permissions
-
+### Permissions
 - `chat:write:bot`
 - `commands`
-
-and install the app to workspace.
-Note the provided OAuth token to deploy erna.
-
-![grant permissions](./assets/permissions.png)
-
-### Deploy *erna*
-To deploy erna as microservice, use zeit now
-
-```sh
-now -e LOCATIONS=SF,NYC car2go/erna
-```
-
-or any other preferred way.  
-Since erna uses internal storage ensure that the app is scaled exactly once at a single datacenter.
-
 
 ## Development
 To simplify the local development and testing, read the [slack tutorial](https://api.slack.com/tutorials/tunneling-with-ngrok) about using tunneling.
