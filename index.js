@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => res.json({ status: 'ok' }))
 app.post('/', handlers.promptLocations)
-app.post('/folks', handlers.confirm)
+app.post('/folks', handlers.feedback)
 
 Object.keys(environment.timezones).forEach(timezone => {
   const cities = environment.timezones[timezone]
