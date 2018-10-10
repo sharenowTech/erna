@@ -33,13 +33,9 @@ It is still work in progress and uses internal storage.
 Feel free to contribute new storage providers or other features.
 
 ## Configuration
-To configure the service use environment variable, e.g. via
+> The configuration is based on environment variables.
 
-```sh
-now -e KEY=VALUE car2go/erna
-```
-
-### `LOCATIONS` [env]
+- `LOCATIONS`
 
 Pass in a comma-separated list of available locations.  
 Those locations are provided as interactive command, so people can choose there current location on a daily basis.
@@ -51,7 +47,7 @@ LOCATIONS=Berlin,Stuttgart,Hamburg,Ulm
 
 If no or just one location is provided, erna skips the prompt for choosing the location as it is unnecessary. 
 
-### `TOKEN` [env]
+- `TOKEN`
 
 The Slack OAuth token is required.  
 How to get the token and set the required permissions is explained in section [setup](#setup).
@@ -61,7 +57,7 @@ Example:
 TOKEN=xoxp-12345678-87654321-10011001-3x4mp13
 ```
 
-### `PORT` [env]
+- `PORT`
 
 Pass in an integer to use a custom port.  
 The default port is `3000`.
@@ -73,13 +69,11 @@ PORT=8080
 
 ## Setup
 ### Slack App
-#### Create Slack app
 Create a Slack app ([here](https://api.slack.com/slack-apps)).  
 Assign a name and a workspace in the following steps.
 
 ![create slack app](./assets/create-slack-app.png)
 
-#### Add features and functionality
 After setting up the Slack app you have to add features like the slash command, interactive components and permissions.
 
 ![add features and functionality](./assets/features.png)
@@ -88,11 +82,12 @@ Start with the slash command, enter the root url of the future service and other
 
 ![create slash command](./assets/command.png)
 
-Continue with the interactive components which enables to ask for the current location. Extend the root url with the `/folks` path.
+Continue with the interactive components which enables to ask for the current location.  
+Extend the root url with the `/folks` path.
 
 ![create interactive component](./assets/interactive.png)
 
-Finally grant the required permissions:
+Finally grant the required permissions
 
 - `chat:write:bot`
 - `commands`
@@ -115,7 +110,7 @@ or any other preferred way.
 ## Development
 To simplify the local development and testing, read the [slack tutorial](https://api.slack.com/tutorials/tunneling-with-ngrok) about using tunneling.
 
-Basically it's enough to install `ngrok`, run `npm start` in the repository and tunnel the port `ngrok http 3000`. Use the output temporary URL in the Slack app settings.
+Basically it's enough to install [ngrok](https://ngrok.com/), run `npm start` in the repository and tunnel the port `ngrok http 3000`. Use the output temporary URL in the Slack app settings.
 
 ## Contributing
 Fork this repository and push in your ideas.
