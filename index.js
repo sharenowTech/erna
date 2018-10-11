@@ -17,7 +17,8 @@ app.post('/', handlers.promptLocations)
 app.post('/folks', handlers.feedback)
 
 Object.keys(environment.timezones).forEach(timezone => {
-  const cities = environment.timezones[timezone]
+  const cities = environment.timezones[timezone].map(x => x.toLowerCase())
+
   cron.schedule('30 11 * * MON-FRI', handlers.match(cities), { timezone })
 })
 
