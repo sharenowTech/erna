@@ -68,6 +68,11 @@ Example:
 TOKEN=xoxp-12345678-87654321-10011001-3x4mp13
 ```
 
+### `SECRET`
+
+The Slack app's signing secret is required.  
+Slack provides the app's signing secret on the **Base Information** page of your app.
+
 ### `[PORT=3000]`
 
 Pass in an integer to use a custom port.  
