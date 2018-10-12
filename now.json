@@ -2,6 +2,7 @@
   "type": "npm",
   "env": [
     "TOKEN",
+    "SECRET",
     "LOCATIONS"
   ]
 }
