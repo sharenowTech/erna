@@ -91,6 +91,10 @@ PORT=8080
 
 ### Permissions
 - `chat:write:bot`
+- `channels:write`
+- `groups:write`
+- `mpim:write`
+- `im:write`
 - `commands`
 
 ## Development
