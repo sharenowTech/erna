@@ -11,6 +11,7 @@
 
 1. [Introduction](#introduction)
 1. [Configuration](#configuration)
+1. [Subcommands](#subcommands)
 1. [Endpoints and Permissions](#endpoints-and-permissions)
 1. [Setup Slack App ⇗](docs/slack-setup.md)
 1. [Development](#development)
@@ -83,16 +84,18 @@ Example:
 PORT=8080
 ```
 
+## Subcommands
+- `restore [url]` – Restore the state of another instance as long as both use the same `SECRET`
+
 ## Endpoints and Permissions
 ### Endpoints
 - `GET /` – Health Check
-- `POST /` – Slash Command
-- `POST /folks` – Interactive Components
+- `GET /locations` – List of all locations and their current sign-ups
+- `POST /commands` – Slash Command
+- `POST /actions` – Interactive Components
 
 ### Permissions
 - `chat:write:bot`
-- `channels:write`
-- `groups:write`
 - `mpim:write`
 - `im:write`
 - `commands`
