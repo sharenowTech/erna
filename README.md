@@ -86,8 +86,9 @@ PORT=8080
 ## Endpoints and Permissions
 ### Endpoints
 - `GET /` – Health Check
-- `POST /` – Slash Command
-- `POST /folks` – Interactive Components
+- `GET /locations` – List of all locations and their current sign-ups
+- `POST /commands` – Slash Command
+- `POST /actions` – Interactive Components
 
 ### Permissions
 - `chat:write:bot`
