@@ -11,6 +11,7 @@
 
 1. [Introduction](#introduction)
 1. [Configuration](#configuration)
+1. [Subcommands](#subcommands)
 1. [Endpoints and Permissions](#endpoints-and-permissions)
 1. [Setup Slack App ⇗](docs/slack-setup.md)
 1. [Development](#development)
@@ -82,6 +83,9 @@ Example:
 ```sh
 PORT=8080
 ```
+
+## Subcommands
+- `restore [url]` – Restore the state of another instance as long as both use the same `SECRET`
 
 ## Endpoints and Permissions
 ### Endpoints
