@@ -83,6 +83,15 @@ Example:
 PORT=8080
 ```
 
+### `[MATCH_SIZE=2]`
+
+Pass in an integer as desired match size.  
+Actual size may differ because of an odd number of members per location.
+
+```sh
+MATCH_SIZE=4
+```
+
 ## Endpoints and Permissions
 ### Endpoints
 - `GET /` – Health Check
