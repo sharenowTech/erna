@@ -100,8 +100,18 @@ PORT=8080
 Pass in an integer as desired match size.  
 Actual size may differ because of an odd number of members per location.
 
+Example:
 ```sh
 MATCH_SIZE=4
+```
+
+### `[MATCH_TIME=11:30]`
+
+Pass in a simple 24h format to define the local time of announcing the matches.  
+
+Example:
+```sh
+MATCH_TIME=15:00
 ```
 
 ## Slack Settings Summary
