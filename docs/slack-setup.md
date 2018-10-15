@@ -31,6 +31,6 @@ Finally grant the required permissions
 - `bot`
 
 and install the app to workspace.
-Note the provided OAuth token to deploy erna.
+Note the provided `Bot User OAuth Access Token` to deploy erna.
 
 ![grant permissions](../assets/permissions.png)
