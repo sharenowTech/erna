@@ -10,13 +10,16 @@ environment.validate()
 
 const app = express()
 const crons = {}
+const rawBodySaver = (req, res, buf, encoding) => {
+  req.rawBody = buf && buf.length ? buf.toString(encoding || 'utf8') : undefined
+}
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json({ verify: rawBodySaver }))
+app.use(bodyParser.urlencoded({ extended: true, verify: rawBodySaver }))
 
 app.get('/', (req, res) => res.json({ status: 'ok' }))
-app.post('/', gatekeeper, handlers.promptLocations)
-app.post('/folks', gatekeeper, handlers.feedback)
+app.post('/commands', gatekeeper.lock, handlers.commands)
+app.post('/actions', gatekeeper.lock, handlers.actions)
 
 Object.keys(environment.timezones).forEach(timezone => {
   const cities = environment.timezones[timezone].map(x => x.toLowerCase())

@@ -86,13 +86,11 @@ PORT=8080
 ## Endpoints and Permissions
 ### Endpoints
 - `GET /` – Health Check
-- `POST /` – Slash Command
-- `POST /folks` – Interactive Components
+- `POST /commands` – Slash Command
+- `POST /actions` – Interactive Components
 
 ### Permissions
 - `chat:write:bot`
-- `channels:write`
-- `groups:write`
 - `mpim:write`
 - `im:write`
 - `commands`
