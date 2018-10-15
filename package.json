@@ -30,6 +30,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@slack/client": "^4.8.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cron": "^1.4.1",
