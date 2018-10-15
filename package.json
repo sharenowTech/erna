@@ -1,6 +1,6 @@
 {
   "name": "erna",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "slack slash command to match people for having lunch",
   "main": "index.js",
   "scripts": {
