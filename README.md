@@ -109,7 +109,6 @@ MATCH_TIME=15:00
 - `POST /actions` – Interactive Components
 
 ### Permissions
-- `users:read`
 - `chat:write:bot`
 - `mpim:write`
 - `im:write`
