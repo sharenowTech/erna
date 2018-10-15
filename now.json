@@ -3,7 +3,8 @@
   "env": [
     "TOKEN",
     "SECRET",
-    "LOCATIONS"
+    "LOCATIONS",
+    "USER_TOKEN"
   ]
 }
 
