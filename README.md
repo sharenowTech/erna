@@ -13,6 +13,7 @@
 1. [Configuration](#configuration)
 1. [Slack Settings Summary](#slack-settings-summary)
 1. [Setup Slack App ⇗](docs/slack-setup.md)
+1. [Storage Adapter ⇗](docs/storage-adapter.md)
 1. [Development](#development)
 1. [Contributing](#contributing)
 1. [License](#license)
@@ -72,6 +73,21 @@ TOKEN=xoxp-12345678-87654321-10011001-3x4mp13
 
 The Slack app's signing secret is required.  
 Slack provides the app's signing secret on the **Base Information** page of your app.
+
+Example:
+```sh
+SECRET=12345abcdef67890
+```
+
+### `[DB=undefined]`
+
+Pass in a custom database url containing all information like credentials.  
+Default is no external database, so it uses an in-memory state instead.
+
+Example:
+```sh
+DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017?ssl=true&replicaSet=myCluster
+```
 
 ### `[PORT=3000]`
 
