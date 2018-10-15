@@ -73,6 +73,18 @@ TOKEN=xoxp-12345678-87654321-10011001-3x4mp13
 The Slack app's signing secret is required.  
 Slack provides the app's signing secret on the **Base Information** page of your app.
 
+### `[SLACK_DB=false]`
+
+Enable persistence by using slack profiles to store the current selected location.  
+Pass `true` to enable.  
+
+This flag requires a **PLUS** or **STANDARD** plan as well as a [custom profile field](https://get.slack.help/hc/en-us/articles/212281478-Customize-member-profiles) called `erna` of type `text`.
+
+Example:
+```sh
+SLACK_DB=true
+```
+
 ### `[PORT=3000]`
 
 Pass in an integer to use a custom port.  
