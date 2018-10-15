@@ -24,7 +24,7 @@ app.post('/actions', gatekeeper.lock, handlers.actions)
 Object.keys(environment.timezones).forEach(timezone => {
   const cities = environment.timezones[timezone].map(x => x.toLowerCase())
 
-  crons[timezone] = new Cron('* * * * MON-FRI', handlers.match(cities), null, true, timezone)
+  crons[timezone] = new Cron('30 11 * * MON-FRI', handlers.match(cities), null, true, timezone)
 })
 
 app.listen(environment.port, () => console.log('server listening'))
