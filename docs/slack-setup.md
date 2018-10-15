@@ -8,19 +8,27 @@ After setting up the Slack app you have to add features like the slash command, 
 
 ![add features and functionality](../assets/features.png)
 
-Start with the slash command, enter the root url of the future service and other options like the command name and a hint.
+Start with creating a bot user named `erna`.
+
+![create bot user](../assets/bot.png)
+
+Continue with the slash command, extend the root url of the future service with `/commands` and other options like the command name and a hint.
 
 ![create slash command](../assets/command.png)
 
 Continue with the interactive components which enables to ask for the current location.  
-Extend the root url with the `/folks` path.
+Extend the root url with the `/actions` path.
 
 ![create interactive component](../assets/interactive.png)
 
 Finally grant the required permissions
 
+- `users:read`
 - `chat:write:bot`
+- `mpim:write`
+- `im:write`
 - `commands`
+- `bot`
 
 and install the app to workspace.
 Note the provided OAuth token to deploy erna.

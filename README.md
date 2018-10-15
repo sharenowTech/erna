@@ -11,7 +11,7 @@
 
 1. [Introduction](#introduction)
 1. [Configuration](#configuration)
-1. [Endpoints and Permissions](#endpoints-and-permissions)
+1. [Slack Settings Summary](#slack-settings-summary)
 1. [Setup Slack App ⇗](docs/slack-setup.md)
 1. [Development](#development)
 1. [Contributing](#contributing)
@@ -92,17 +92,22 @@ Actual size may differ because of an odd number of members per location.
 MATCH_SIZE=4
 ```
 
-## Endpoints and Permissions
+## Slack Settings Summary
 ### Endpoints
 - `GET /` – Health Check
 - `POST /commands` – Slash Command
 - `POST /actions` – Interactive Components
 
 ### Permissions
+- `users:read`
 - `chat:write:bot`
 - `mpim:write`
 - `im:write`
 - `commands`
+- `bot`
+
+### Bot User
+- named `erna`
 
 ## Development
 To simplify the local development and testing, read the [slack tutorial](https://api.slack.com/tutorials/tunneling-with-ngrok) about using tunneling.
