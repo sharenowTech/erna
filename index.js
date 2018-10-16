@@ -3,35 +3,29 @@ require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const Cron = require('cron').CronJob
-const environment = require('./lib/environment')
+const env = require('./lib/env')
+const middleware = require('./lib/middleware')
 const handlers = require('./lib/handlers')
 const gatekeeper = require('./lib/gatekeeper')
+const scheduler = require('./lib/scheduler')
 const storage = require('./lib/storage')
 
-environment.validate()
 storage.init()
-
 const app = express()
-const crons = {}
-const rawBodySaver = (req, res, buf, encoding) => {
-  req.rawBody = buf && buf.length ? buf.toString(encoding || 'utf8') : undefined
-}
 
-const asyncMiddleware = fn => (req, res, next) => {
-  Promise.resolve(fn(req, res, next)).catch(next)
-}
-
-app.use(bodyParser.json({ verify: rawBodySaver }))
-app.use(bodyParser.urlencoded({ extended: true, verify: rawBodySaver }))
+app.use(bodyParser.json({ verify: middleware.rawBody }))
+app.use(bodyParser.urlencoded({ extended: true, verify: middleware.rawBody }))
 
 app.get('/', (req, res) => res.json({ status: 'ok' }))
-app.post('/commands', gatekeeper.lock, asyncMiddleware(handlers.commands))
-app.post('/actions', gatekeeper.lock, asyncMiddleware(handlers.actions))
+app.post('/commands', gatekeeper.lock, middleware.async(handlers.commands))
+app.post('/actions', gatekeeper.lock, middleware.async(handlers.actions))
 
-Object.keys(environment.timezones).forEach(timezone => {
-  const cities = environment.timezones[timezone].map(x => x.toLowerCase())
+Object.keys(env.locations.tzs).forEach(timezone => {
+  const cities = env.locations.tzs[timezone]
+  const cronPattern = `${env.matchTime.cron} * * ${env.matchDay.raw}`
+  const cron = new Cron(cronPattern, handlers.match(cities), null, true, timezone)
 
-  crons[timezone] = new Cron(`${environment.matchTime.cron} * * MON-FRI`, handlers.match(cities), null, true, timezone)
+  scheduler.add(timezone, cron)
 })
 
-app.listen(environment.port, () => console.log('server listening'))
+app.listen(env.port, () => console.log('server listening'))
