@@ -33,15 +33,15 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
   **Output:**  
   n/a
 
-- #### `async has(user)`
-  Check if a user already has signed up for the next matching.  
+- #### `async in(user)`
+  Check if a user already has signed up for the next matching and in which location.  
   Check all available locations.
 
   **Input:**  
   `user <string>` – The userId of the slack user
 
   **Output:**  
-  `<boolean>` – Whether the user has signed up already.
+  `<string|undefined>` – The name of the location or `undefined`.
 
 - #### `async push(location, user)`
   Add a user to the defined location.  
@@ -53,6 +53,15 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
 
   **Output:**  
   `<boolean>` – Whether the the user was added to a location 
+
+- #### `async pop(user)`
+  Remove a user of all the locations if available.  
+
+  **Input:**  
+  `user <string>` – The userId of the slack user
+
+  **Output:**  
+  n/a
 
 - #### `async match(cities)`
   Get list of matches of the defined size for all passed locations.  
