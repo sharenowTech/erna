@@ -61,7 +61,7 @@ If just one location is provided, **erna** skips the prompt for choosing the loc
 
 ### `TOKEN`
 
-The Slack Bot Token is required.  
+The Slack Bot User OAuth Access Token is required.  
 How to get the token and set the required permissions is explained in the [slack setup chapter](docs/slack-setup.md).
 
 Example:
