@@ -1,7 +1,7 @@
 ![logo](./assets/logo.gif)
 
 
-# erna – eat, relax & natter alternately
+# erna – E*at*, R*elax* & N*atter* A*lternately*
 ## slack slash command to match people for having lunch
 
 ![standard](https://img.shields.io/badge/code_style-standard-brightgreen.svg)
@@ -11,8 +11,10 @@
 
 1. [Introduction](#introduction)
 1. [Configuration](#configuration)
+1. [Deployment](#deployment)
 1. [Slack Settings Summary](#slack-settings-summary)
 1. [Setup Slack App ⇗](docs/slack-setup.md)
+1. [Storage Adapter ⇗](docs/storage-adapter.md)
 1. [Development](#development)
 1. [Contributing](#contributing)
 1. [License](#license)
@@ -22,7 +24,9 @@
 ![demo](./assets/demo.gif)
 
 ## Introduction
-This [Slack](https://slack.com) [slash command](https://api.slack.com/slash-commands) is inspired by car2go's previous platform `luncher2go` which matches coworkers of one location on demand to get to know new colleagues while having lunch.
+This [Slack](https://slack.com) [slash command](https://api.slack.com/slash-commands) is inspired by car2go's previous platform `luncher2go` which matches coworkers of one location on demand to get to know new colleagues while having lunch, a coffee chat or similar.
+
+The basic idea behind **erna** is to enter a specific command, choose your current location and get your match at the defined time and day. In case of an odd number of applicants, there's one larger group. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
 
 The app is optimized for [zeit now](https://zeit.co/now), so that it is possible to deploy the app with a single command: 
 
@@ -30,22 +34,19 @@ The app is optimized for [zeit now](https://zeit.co/now), so that it is possible
 now car2go/erna
 ```
 
-The basic idea behind erna is to enter a specific command, choose your current location and get your match at 11:30am local time. In case of an odd number of applicants, there's one group of three people; otherwise it is a 1on1. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
-
-It is still work in progress and uses internal storage.  
 Feel free to contribute new storage providers or other features.  
-Since erna uses internal storage ensure that the app is scaled exactly once at a single datacenter.
+Since **erna** uses internal storage as default ensure that the app is scaled exactly once at a single datacenter.
 
 ## Configuration
 The configuration is based on environment variables.
 
 ### `LOCATIONS`
 
-Pass in a comma-separated list of available locations.  
+Pass in a list of available locations including the related timezone.  
 Those locations are provided as interactive command, so people can choose their current location on a daily basis.  
 
-Besides the locations it is necessary to define the related [timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) ([map](http://efele.net/maps/tz/)).  
-Each timezone is enclosed between `#` and `:`. So the final schema is like:
+As already said, it is necessary to define the related [timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) ([map](http://efele.net/maps/tz/)).  
+Each timezone is enclosed between `#` and `:`:
 
 ```sh
 [#<Timezone>:<Location>[,<Location>*]]+
@@ -56,12 +57,12 @@ Example:
 LOCATIONS=#Europe/Berlin:Berlin,Hamburg#America/New_York:NYC
 ```
 
-If just one location is provided, erna skips the prompt for choosing the location as it is unnecessary. 
+If just one location is provided, **erna** skips the prompt for choosing the location as it is unnecessary. 
 
 ### `TOKEN`
 
-The Slack OAuth token is required.  
-How to get the token and set the required permissions is explained in section [Slack setup chapter](docs/slack-setup.md).
+The Slack Bot User OAuth Access Token is required.  
+How to get the token and set the required permissions is explained in the [slack setup chapter](docs/slack-setup.md).
 
 Example:
 ```sh
@@ -70,8 +71,24 @@ TOKEN=xoxp-12345678-87654321-10011001-3x4mp13
 
 ### `SECRET`
 
-The Slack app's signing secret is required.  
-Slack provides the app's signing secret on the **Base Information** page of your app.
+The Slack app its signing secret is required.  
+Slack provides the app its signing secret on the **Base Information** page of your app.
+
+Example:
+```sh
+SECRET=12345abcdef67890
+```
+
+### `[DB=undefined]`
+
+Pass in a custom database url containing all information like credentials, clusters, replica set and further options. 
+Default is no external database, so it uses an in-memory state instead.  
+Further information about the storage is listed in the [storage adapter chapters](docs/storage-adapter.md).
+
+Example:
+```sh
+DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017?ssl=true&replicaSet=myCluster
+```
 
 ### `[PORT=3000]`
 
@@ -86,7 +103,8 @@ PORT=8080
 ### `[MATCH_SIZE=2]`
 
 Pass in an integer as desired match size.  
-Actual size may differ because of an odd number of members per location.
+Actual size may differ because of an odd number of members per location.  
+So the possible group size is `2 ≤ [ACTUAL_MATCH_SIZE] ≤ [MATCH_SIZE] + 1 `
 
 Example:
 ```sh
@@ -95,11 +113,60 @@ MATCH_SIZE=4
 
 ### `[MATCH_TIME=11:30]`
 
-Pass in a simple 24h format to define the local time of announcing the matches.  
+Pass in a simple 24hr format to define the local time of announcing the matches.  
+Do not pass `am`/`pm` 12hr formats. This option affects both the Slack messages and the scheduled matches.
 
 Example:
 ```sh
 MATCH_TIME=15:00
+```
+
+### `[MATCH_DAY=MON]`
+
+Pass in a single day in the `MON/TUE/WED/THU/FRI/SAT/SUN` format to define the day of announcing the matches.  
+This option affects both the Slack messages and the scheduled matches.
+
+Example:
+```sh
+MATCH_DAY=TUE
+```
+
+## Deployment 
+To simplify the deployment of **erna** there are a couple of ways to pass the configurations mentioned above.  
+Since this service is optimized for [zeit now](https://zeit.co/now) the following lines focus on this service. But it is quite easy and straightforward to adapt the principle to other services.
+
+### Dotenv & Now CLI
+The easiest way to deploy **erna** is to define a custom `.env` like `.env.erna.prod` and pass the file directly to the CLI. Using `car2go/erna` as the service to be deployed, fetches the repository from GitHub.
+
+```sh
+# .env.erna.prod
+
+LOCATIONS=#Europe/Berlin:Berlin,Hamburg#America/New_York:NYC
+TOKEN=xoxp-12345678-87654321-10011001-3x4mp13
+SECRET=12345abcdef67890
+DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017?ssl=true&replicaSet=myCluster
+```
+
+```sh
+now -E .env.erna.prod car2go/erna
+```
+
+### Clone, Dotenv & Deploy
+Alternatively it is possible to clone the repository, enter the created directory, create a `.env` file and deploy the service. There is an integrated solution which fetches an existing `.env` file, so no further actions are needed.
+
+```sh
+# .env
+
+LOCATIONS=#Europe/Berlin:Berlin,Hamburg#America/New_York:NYC
+TOKEN=xoxp-12345678-87654321-10011001-3x4mp13
+SECRET=12345abcdef67890
+DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017?ssl=true&replicaSet=myCluster
+```
+
+```sh
+git clone https://github.com/car2go/erna.git
+cd erna
+# deploy via `now` or similar
 ```
 
 ## Slack Settings Summary
@@ -109,7 +176,6 @@ MATCH_TIME=15:00
 - `POST /actions` – Interactive Components
 
 ### Permissions
-- `users:read`
 - `chat:write:bot`
 - `mpim:write`
 - `im:write`
@@ -123,6 +189,70 @@ MATCH_TIME=15:00
 To simplify the local development and testing, read the [slack tutorial](https://api.slack.com/tutorials/tunneling-with-ngrok) about using tunneling.
 
 Basically it's enough to install [ngrok](https://ngrok.com/), run `npm start` in the repository and tunnel the port `ngrok http 3000`. Use the output temporary URL in the Slack app settings.
+
+### Environment Validation & Configuration
+The validator (`./lib/env/validator.js`) is reponsible for handling and validating environment variables. The schema listed in `./lib/env/schema.js` defines which variables are required, what are their defaults, which regex pattern is required and how to transform the passed values.
+
+For this purpose the schema is an object of objects with the following properties:
+
+- `name <string>`  
+  Define the name of the instance variable which exposes the transformed value.  
+  E.g. `name="port"` enables access via `env.port`.
+
+- `[required=false] <boolean>`  
+  Define if a environment variable is required.  
+  Throws an error in case of `undefined`.  
+
+- `[desc=''] <string>`  
+  Short escription of the related variable.
+  Should be provided for a object even though its not required. It enriches the error messages which further details.
+
+- `[default=undefined] <*>`  
+  The default value of the variable.  
+  Is only mindful in the case of optional ones.
+
+- `[pattern=undefined] <RegExp>`  
+  The pattern which validates the value of a defined variable. Has no effect in case of `undefined`.  
+  Throws an error in case of failure.
+
+- `[transform=undefined] <Function>`  
+  A function which transforms the value (or default).  
+  The function receives the value a first argument and is required to return a new value.
+
+  Example:
+  ```js
+  {
+    name: 'port',
+    default: '3000',
+    transform(x) {
+      return parseInt(x, 10)
+    }
+  }
+  ```
+
+  This definition allows access to the port parsed as integer via `env.port`.
+
+- `[props=undefined] <Object.<Function>>`  
+  An object of function which behave like `transform` but enable various representations of a single variable.  
+  It is not possible to define both `props` and `transform`.
+
+  Example:
+  ```js
+  {
+    name: 'users',
+    props: {
+      list(x) {
+        return x.split(' ')
+      },
+      raw(x) {
+        return x
+      }
+    }
+  }
+  ```
+
+  This definition allows access to a split string via `env.users.list` and the original string via `env.users.raw`.
+
 
 ## Contributing
 Fork this repository and push in your ideas.
