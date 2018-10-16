@@ -123,28 +123,24 @@ MATCH_TIME=15:00
 
 ## Deployment 
 To simplify the deployment of **erna** there are a couple of ways to pass the configurations mentioned above.  
-Since this service is optimized for [zeit now](https://zeit.co/now) the following lines focus on this service. But it is quite easy and straightforward to adapt the principles to other services.
+Since this service is optimized for [zeit now](https://zeit.co/now) the following lines focus on this service. But it is quite easy and straightforward to adapt the principle to other services.
 
-### Now CLI & JSON Configuration
-The easiest way to deploy **erna** is to define a custom `now.json` like `now.prod.json` and pass the file directly to the CLI. Using `car2go/erna` as the service to be deployed, fetches the repository from GitHub.
+The easiest way to deploy **erna** is to define a custom `.env` like `.env.erna.prod` and pass the file directly to the CLI. Using `car2go/erna` as the service to be deployed, fetches the repository from GitHub.
 
-```json
-# now.prod.json
-{
-  "env": {
-    "LOCATION": "#Europe/Berlin:Berlin,Hamburg#America/New_York:NYC",
-    "TOKEN": "xoxp-12345678-87654321-10011001-3x4mp13",
-    "SECRET": "12345abcdef67890",
-    "DB": "mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017?ssl=true&replicaSet=myCluster"
-  }
-}
+```sh
+# .env.erna.prod
+
+LOCATIONS=#Europe/Berlin:Berlin,Hamburg#America/New_York:NYC
+TOKEN=xoxp-12345678-87654321-10011001-3x4mp13
+SECRET=12345abcdef67890
+DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017?ssl=true&replicaSet=myCluster
 ```
 
 ```sh
-now -A now.prod.json car2go/erna
+now -E .env.erna.prod car2go/erna
 ```
 
-### Clone, Dotenv & Now CLI
+### Clone, Dotenv & Deploy
 Alternatively it is possible to clone the repository, enter the created directory, create a `.env` file and deploy the service. There is an integrated solution which fetches an existing `.env` file, so no further actions are needed.
 
 ```sh
@@ -159,7 +155,7 @@ DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017
 ```sh
 git clone https://github.com/car2go/erna.git
 cd erna
-now
+# deploy via `now` or similar
 ```
 
 ## Slack Settings Summary
