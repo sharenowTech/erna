@@ -24,53 +24,53 @@ To create a new custom adapter extend the [`adapter`](../lib/storage/adapter.js)
 
 The basic error handling for this functions is implemented in [`composeWrapper`](./lib/storage/composeWrapper.js).
 
-#### `async init()`
-Run basic initialization tasks like setting up the database connection.
+- #### `async init()`
+  Run basic initialization tasks like setting up the database connection.
 
-**Input:**  
-n/a
+  **Input:**  
+  n/a
 
-**Output:**  
-n/a
+  **Output:**  
+  n/a
 
-#### `async has(user)`
-Check if a user already has signed up for the next matching.  
-Check all available locations.
+- #### `async has(user)`
+  Check if a user already has signed up for the next matching.  
+  Check all available locations.
 
-**Input:**  
-`user <string>` – The userId of the slack user
+  **Input:**  
+  `user <string>` – The userId of the slack user
 
-**Output:**  
-`<boolean>` – Whether the user has signed up already.
+  **Output:**  
+  `<boolean>` – Whether the user has signed up already.
 
-#### `async push(location, user)`
-Add a user to the defined location.  
-Just add the user if the `userId` is not mapped to any location.
+- #### `async push(location, user)`
+  Add a user to the defined location.  
+  Just add the user if the `userId` is not mapped to any location.
 
-**Input:**  
-`location <string>` – The lowercase name of the location  
-`user <string>` – The userId of the slack user
+  **Input:**  
+  `location <string>` – The lowercase name of the location  
+  `user <string>` – The userId of the slack user
 
-**Output:**  
-`<boolean>` – Whether the the user was added to a location 
+  **Output:**  
+  `<boolean>` – Whether the the user was added to a location 
 
-#### `async match(cities)`
-Get list of matches of the defined size for all passed locations.  
-Use `this.chunk` and `this.sort` to get chunks of random matches.  
-Use `this.flatten` to flatten the list to get the desired format.
+- #### `async match(cities)`
+  Get list of matches of the defined size for all passed locations.  
+  Use `this.chunk` and `this.sort` to get chunks of random matches.  
+  Use `this.flatten` to flatten the list to get the desired format.
 
-**Input:**  
-`cities <Array.<string>>` – A list of lowercase names of locations to be used to find matches
+  **Input:**  
+  `cities <Array.<string>>` – A list of lowercase names of locations to be used to find matches
 
-**Output:**  
-`<Array.<Array.<string>>>` – A list of matches where each match is a list of userIds.
+  **Output:**  
+  `<Array.<Array.<string>>>` – A list of matches where each match is a list of userIds.
 
-#### `async purge(cities)`
-Delete documents related to the passed location names.  
-Delete the whole object and do not only clear the array of signed up users.
+- #### `async purge(cities)`
+  Delete documents related to the passed location names.  
+  Delete the whole object and do not only clear the array of signed up users.
 
-**Input:**  
-`cities <Array.<string>>` – A list of lowercase names of locations to be deleted.
+  **Input:**  
+  `cities <Array.<string>>` – A list of lowercase names of locations to be deleted.
 
-**Output:**  
-n/a
+  **Output:**  
+  n/a
