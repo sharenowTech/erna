@@ -26,7 +26,7 @@
 ## Introduction
 This [Slack](https://slack.com) [slash command](https://api.slack.com/slash-commands) is inspired by car2go's previous platform `luncher2go` which matches coworkers of one location on demand to get to know new colleagues while having lunch, a coffee chat or similar.
 
-The basic idea behind **erna** is to enter a specific command, choose your current location and get your match at the defined local time. In case of an odd number of applicants, there's one larger group. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
+The basic idea behind **erna** is to enter a specific command, choose your current location and get your match at the defined time and day. In case of an odd number of applicants, there's one larger group. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
 
 The app is optimized for [zeit now](https://zeit.co/now), so that it is possible to deploy the app with a single command: 
 
@@ -119,6 +119,16 @@ Do not pass `am`/`pm` 12hr formats. This option affects both the Slack messages 
 Example:
 ```sh
 MATCH_TIME=15:00
+```
+
+### `[MATCH_DAY=MON]`
+
+Pass in a single day in the `MON/TUE/WED/THU/FRI/SAT/SUN` format to define the day of announcing the matches.  
+This option affects both the Slack messages and the scheduled matches.
+
+Example:
+```sh
+MATCH_DAY=TUE
 ```
 
 ## Deployment 
