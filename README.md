@@ -125,6 +125,7 @@ MATCH_TIME=15:00
 To simplify the deployment of **erna** there are a couple of ways to pass the configurations mentioned above.  
 Since this service is optimized for [zeit now](https://zeit.co/now) the following lines focus on this service. But it is quite easy and straightforward to adapt the principle to other services.
 
+### Dotenv & Now CLI
 The easiest way to deploy **erna** is to define a custom `.env` like `.env.erna.prod` and pass the file directly to the CLI. Using `car2go/erna` as the service to be deployed, fetches the repository from GitHub.
 
 ```sh
