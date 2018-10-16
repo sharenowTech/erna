@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const Cron = require('cron').CronJob
@@ -5,7 +7,6 @@ const environment = require('./lib/environment')
 const handlers = require('./lib/handlers')
 const gatekeeper = require('./lib/gatekeeper')
 const storage = require('./lib/storage')
-require('dotenv').config()
 
 environment.validate()
 storage.init()
