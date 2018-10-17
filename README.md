@@ -6,7 +6,7 @@
 
 ![standard](https://img.shields.io/badge/code_style-standard-brightgreen.svg)
 ![standard](https://img.shields.io/badge/license-MIT-brightgreen.svg)
-![node](https://img.shields.io/badge/node_version->=7-brightgreen.svg)
+![node](https://img.shields.io/badge/node_version->=8-brightgreen.svg)
 
 
 1. [Introduction](#introduction)
