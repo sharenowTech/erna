@@ -147,7 +147,7 @@ MATCH_TIME=15:00
 
 ### `[MATCH_DAY=MON]`
 
-Pass in a single day matching the `/^((MON-FRI)|MON|TUE|WED|THU|FRI|SAT|SUN)$/` pattern to define the day or range of days for announcing the matches.  
+Pass in a single day matching the `/^(MON|TUE|WED|THU|FRI|SAT|SUN)$/` pattern to define the day or range of days for announcing the matches.  
 This option affects both the Slack messages and the scheduled matches.
 
 Example:
