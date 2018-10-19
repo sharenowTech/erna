@@ -10,6 +10,7 @@ const gatekeeper = require('./lib/gatekeeper')
 const scheduler = require('./lib/scheduler')
 const storage = require('./lib/storage')
 
+process.on('unhandledRejection', console.error)
 storage.init()
 const app = express()
 
