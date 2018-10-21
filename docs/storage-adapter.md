@@ -33,6 +33,15 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
   **Output:**  
   n/a
 
+- #### `async has(user)`
+  Check if a user already has ever signed up.  
+
+  **Input:**  
+  `user <string>` – The userId of the slack user
+
+  **Output:**  
+  `<boolean>` – Whether the user with `userId` has ever signed up.
+
 - #### `async in(user)`
   Check if a user already has signed up for the next matching and in which location.  
   Check all available locations.
@@ -44,8 +53,10 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
   `<string|undefined>` – The name of the location or `undefined`.
 
 - #### `async push(location, user)`
-  Add a user to the defined location.  
-  Just add the user if the `userId` is not mapped to any location.
+  Add a user to the defined location and to a list of signed up users.  
+  Just add the user if the `userId` is not mapped to any location.  
+  Additionally add the `userId` to another collection of unique users to identify recurring users.  
+  Optionally increment the count in this list to get statistics.
 
   **Input:**  
   `location <string>` – The lowercase name of the location  
