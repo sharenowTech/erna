@@ -29,7 +29,7 @@ This [Slack](https://slack.com) [slash command](https://api.slack.com/slash-comm
 
 The basic idea behind **erna** is to enter a specific command, choose your current location and get your match at the defined time, day and week. In case of an odd number of applicants, there's one larger group. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
 
-While starting, **erna** generates to 250 scheduled events per timezone which are enough for 1-50 years. Additionally it is possible to schedule custom location-specific events via a subcommand `schedule`.
+While starting, **erna** generates to 250 scheduled events per timezone which are enough for roughly 1-24 years. Additionally it is possible to schedule custom location-specific events via a subcommand `schedule`.
 
 The app is optimized for [zeit now v1](https://zeit.co/now), so that it is possible to deploy the app with a few commands: 
 
