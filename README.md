@@ -13,7 +13,7 @@
 1. [Flows](#flows)
 1. [Configuration](#configuration)
 1. [Deployment](#deployment)
-1. [Slack Settings Summary](#slack-settings-summary)
+1. [Settings Summary](#settings-summary)
 1. [Setup Slack App ⇗](docs/slack-setup.md)
 1. [Storage Adapter ⇗](docs/storage-adapter.md)
 1. [Development](#development)
@@ -27,7 +27,9 @@
 ## Introduction
 This [Slack](https://slack.com) [slash command](https://api.slack.com/slash-commands) is inspired by car2go's previous platform `luncher2go` which matches coworkers of one location on demand to get to know new colleagues while having lunch, a coffee chat or similar.
 
-The basic idea behind **erna** is to enter a specific command, choose your current location and get your match at the defined time and day. In case of an odd number of applicants, there's one larger group. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
+The basic idea behind **erna** is to enter a specific command, choose your current location and get your match at the defined time, day and week. In case of an odd number of applicants, there's one larger group. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
+
+While starting, **erna** generates to 250 scheduled events per timezone which are enough for 1-50 years. Additionally it is possible to schedule custom location-specific events via a subcommand `schedule`.
 
 The app is optimized for [zeit now v1](https://zeit.co/now), so that it is possible to deploy the app with a few commands: 
 
@@ -62,6 +64,12 @@ Since **erna** is a cronjob-like service ensure that the app is scaled exactly o
         1. just available if there are multiple locations
         1. restart the signup process
         1. it is not possible to cancel the update process
+
+### Schedule a custom event
+1. Run the command with a `schedule` subcommand:  
+`/<command> schedule <location> <yyyy-mm-dd> <hh:mm (UTC)>`
+    1. Get notified that something went wrong in case of failure.
+    1. Get notified about the scheduled event in case of success.
 
 ## Configuration
 The configuration is based on environment variables.
@@ -206,20 +214,21 @@ cd erna
 # deploy via `now` or similar
 ```
 
-## Slack Settings Summary
+## Settings Summary
 ### Endpoints
 - `GET /` – Health Check
+- `GET /schedule` – Overview over future events (regular & custom ones)
 - `POST /commands` – Slash Command
 - `POST /actions` – Interactive Components
 
-### Permissions
+### Slack App Permissions
 - `chat:write:bot`
 - `mpim:write`
 - `im:write`
 - `commands`
 - `bot`
 
-### Bot User
+### Slack Bot User
 - named `erna`
 
 ## Development
