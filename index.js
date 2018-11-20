@@ -25,11 +25,11 @@ async function init () {
   app.post('/commands', gatekeeper.lock, middleware.async(handlers.commands))
   app.post('/actions', gatekeeper.lock, middleware.async(handlers.actions))
 
-  Object.keys(env.locations.tzs).forEach((timezone) => {
+  Object.keys(env.locations.tzs).forEach((tz) => {
     const cronPattern = `${env.matchTime.cron} * * ${env.matchDay.raw}`
-    const cron = new Cron(cronPattern, () => {}, null, true, timezone)
+    const cron = new Cron(cronPattern, () => {}, null, true, tz)
 
-    scheduler.add(timezone, cron)
+    scheduler.add(tz, cron)
   })
 
   scheduler.ticker = new Cron('* * * * *', handlers.match, null, true, null, null, null, 0)
