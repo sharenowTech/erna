@@ -21,7 +21,7 @@ async function init () {
   app.use(bodyParser.urlencoded({ extended: true, verify: middleware.rawBody }))
 
   app.get('/', (req, res) => res.json({ status: 'ok' }))
-  app.get('/schedule', (req, res) => res.json(scheduler.events))
+  app.get('/schedule', middleware.async(handlers.schedule))
   app.post('/commands', gatekeeper.lock, middleware.async(handlers.commands))
   app.post('/actions', gatekeeper.lock, middleware.async(handlers.actions))
 
