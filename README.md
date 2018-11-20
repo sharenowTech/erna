@@ -29,14 +29,16 @@ This [Slack](https://slack.com) [slash command](https://api.slack.com/slash-comm
 
 The basic idea behind **erna** is to enter a specific command, choose your current location and get your match at the defined time and day. In case of an odd number of applicants, there's one larger group. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
 
-The app is optimized for [zeit now](https://zeit.co/now), so that it is possible to deploy the app with a single command: 
+The app is optimized for [zeit now v1](https://zeit.co/now), so that it is possible to deploy the app with a few commands: 
 
 ```sh
-now car2go/erna
+git clone https://github.com/car2go/erna.git
+cd erna
+now
 ```
 
 Feel free to contribute new storage providers or other features.  
-Since **erna** uses internal storage as default ensure that the app is scaled exactly once at a single datacenter.
+Since **erna** is a cronjob-like service ensure that the app is scaled exactly once at a single datacenter.
 
 ## Flows
 ### Sign up for date
@@ -155,12 +157,21 @@ Example:
 MATCH_DAY=TUE
 ```
 
+### `[MATCH_INTERVAL=1,2,3,4,5]`
+Pass in a comma-separated list of week numbers per month matching the pattern `/^[1-5](,[1-5])?$/`.  
+It filters the generated events by week numbers. So passing `1,3` excludes all events scheduled in the second, fourth and fifth week of a month.
+
+Example:
+```sh
+MATCH_DAY=1,3
+```
+
 ## Deployment 
 To simplify the deployment of **erna** there are a couple of ways to pass the configurations mentioned above.  
-Since this service is optimized for [zeit now](https://zeit.co/now) the following lines focus on this service. But it is quite easy and straightforward to adapt the principle to other services.
+Since this service is optimized for [zeit now v1](https://zeit.co/now) the following lines focus on this service. But it is quite easy and straightforward to adapt the principle to other services.
 
-### Dotenv & Now CLI
-The easiest way to deploy **erna** is to define a custom `.env` like `.env.erna.prod` and pass the file directly to the CLI. Using `car2go/erna` as the service to be deployed, fetches the repository from GitHub.
+### Now CLI
+The easiest way to deploy **erna** is to define a custom `.env` like `.env.erna.prod` and pass the file directly to the CLI.
 
 ```sh
 # .env.erna.prod
@@ -172,10 +183,12 @@ DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017
 ```
 
 ```sh
-now -E .env.erna.prod car2go/erna
+git clone https://github.com/car2go/erna.git
+cd erna
+now -E .env.erna.prod
 ```
 
-### Clone, Dotenv & Deploy
+### Other Services
 Alternatively it is possible to clone the repository, enter the created directory, create a `.env` file and deploy the service. There is an integrated solution which fetches an existing `.env` file, so no further actions are needed.
 
 ```sh

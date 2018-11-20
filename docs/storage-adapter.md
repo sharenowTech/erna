@@ -59,7 +59,7 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
   Optionally increment the count in this list to get statistics.
 
   **Input:**  
-  `location <string>` – The lowercase name of the location  
+  `location <string>` – The name of the location  
   `user <string>` – The userId of the slack user
 
   **Output:**  
@@ -74,23 +74,56 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
   **Output:**  
   n/a
 
-- #### `async match(cities)`
+- #### `async match(locations)`
   Get list of matches of the defined size for all passed locations.  
   Use `this.chunk` and `this.sort` to get chunks of random matches.  
   Use `this.flatten` to flatten the list to get the desired format.
 
   **Input:**  
-  `cities <Array.<string>>` – A list of lowercase names of locations to be used to find matches
+  `locations <Array.<string>>` – A list of names of locations to be used to find matches
 
   **Output:**  
   `<Array.<Array.<string>>>` – A list of matches where each match is a list of userIds.
 
-- #### `async purge(cities)`
+- #### `async purge(locations)`
   Delete documents related to the passed location names.  
   Delete the whole object and do not only clear the array of signed up users.
 
   **Input:**  
-  `cities <Array.<string>>` – A list of lowercase names of locations to be deleted.
+  `locations <Array.<string>>` – A list of names of locations to be deleted.
 
   **Output:**  
   n/a
+
+- #### `async setSchedule(user, location, datetime)`
+  Add a scheduled event to the defined location.  
+  Additionally add all arguments as new document to another collection.
+
+  **Input:**  
+  `user <string>` – The userId of the slack user.  
+  `location <string>` – The name of the location.  
+  `datetime <string>` – The datetime (UTC) as ISO string.
+
+  **Output:**  
+  n/a
+
+- #### `async getSchedule(datetime)`
+  Get list of locations with have an event scheduled at the passed datetime.  
+  Remove the datetime in the list of events per location if there was a match.
+
+  **Input:**  
+  `datetime <string>` – The datetime (UTC) as ISO string.
+
+  **Output:**  
+  `<Array.<string>>` – A list of names of matched locations.
+
+- #### `async listSchedule()`
+  Get mapping of all scheduled events per location.  
+  Key is the location name and value the list of datetimes.
+
+  **Input:**  
+  n/a
+
+  **Output:**  
+  `Object` – List of scheduled events.
+
