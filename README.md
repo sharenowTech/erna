@@ -171,15 +171,14 @@ It filters the generated events by week numbers. So passing `1,3` excludes all e
 
 Example:
 ```sh
-MATCH_DAY=1,3
+MATCH_INTERVAL=1,3
 ```
 
 ## Deployment 
 To simplify the deployment of **erna** there are a couple of ways to pass the configurations mentioned above.  
 Since this service is optimized for [zeit now v1](https://zeit.co/now) the following lines focus on this service. But it is quite easy and straightforward to adapt the principle to other services.
 
-### Now CLI
-The easiest way to deploy **erna** is to define a custom `.env` like `.env.erna.prod` and pass the file directly to the CLI.
+The easiest way to deploy **erna** is to clone the repository, enter the created directory, create a `.env` file and deploy the service. There is an integrated solution which fetches an existing `.env` file, so no further actions are needed. Moreover, it is possible to pass a specific file like `.env.prod` using the `-E` flag. Feel free to replace `now` with your preferred service.
 
 ```sh
 # .env.erna.prod
@@ -193,25 +192,15 @@ DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017
 ```sh
 git clone https://github.com/car2go/erna.git
 cd erna
-now -E .env.erna.prod
+now
 ```
 
-### Other Services
-Alternatively it is possible to clone the repository, enter the created directory, create a `.env` file and deploy the service. There is an integrated solution which fetches an existing `.env` file, so no further actions are needed.
-
-```sh
-# .env
-
-LOCATIONS=#Europe/Berlin:Berlin,Hamburg#America/New_York:NYC
-TOKEN=xoxp-12345678-87654321-10011001-3x4mp13
-SECRET=12345abcdef67890
-DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017?ssl=true&replicaSet=myCluster
-```
+or
 
 ```sh
 git clone https://github.com/car2go/erna.git
 cd erna
-# deploy via `now` or similar
+now -E .env.erna.prod
 ```
 
 ## Settings Summary
