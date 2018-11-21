@@ -117,6 +117,17 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
   **Output:**  
   `<Array.<string>>` – A list of names of matched locations.
 
+- #### `async nextSchedule(location)`
+  Find the first scheduled event for the specific location.  
+  If there is no event scheduled, return `null`.
+
+  **Input:**  
+  `location <string>` – The name of the location.
+
+  **Output:**  
+  `<string|null>` – The next scheduled event for the passed location or null
+
+
 - #### `async listSchedule()`
   Get mapping of all scheduled events per location.  
   Key is the location name and value the list of datetimes.
