@@ -25,7 +25,8 @@ To create a new custom adapter extend the [`adapter`](../lib/storage/adapter.js)
 The basic error handling for this functions is implemented in [`composeWrapper`](./lib/storage/composeWrapper.js).
 
 - #### `async init()`
-  Run basic initialization tasks like setting up the database connection.
+  Run basic initialization tasks like setting up the database connection.  
+  Cleanup all scheduled events which were scheduled before the current datetime string.
 
   **Input:**  
   n/a
@@ -119,13 +120,14 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
 
 - #### `async nextSchedule(location)`
   Find the first scheduled event for the specific location.  
-  If there is no event scheduled, return `null`.
+  Return an object the keys `time` and `title` (optional).  
+  If there is no event scheduled, return `{}`.
 
   **Input:**  
   `location <string>` – The name of the location.
 
   **Output:**  
-  `<string|null>` – The next scheduled event for the passed location or null
+  `<object>` – The next scheduled event for the passed location
 
 
 - #### `async listSchedule()`
