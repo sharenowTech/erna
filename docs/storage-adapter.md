@@ -97,7 +97,8 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
   n/a
 
 - #### `async setSchedule(user, location, datetime)`
-  Add a scheduled event to the defined location.  
+  If there is already an event scheduled at the same time & location, return the event.  
+  Otherwise add a scheduled event to the defined location.  
   Additionally add all arguments as new document to another collection.
 
   **Input:**  
@@ -106,7 +107,7 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
   `datetime <string>` – The datetime (UTC) as ISO string.
 
   **Output:**  
-  n/a
+  `<object|undefined>` – The existing event with the same data or `undefined`.
 
 - #### `async getSchedule(datetime)`
   Get list of locations with have an event scheduled at the passed datetime.  
