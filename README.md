@@ -68,10 +68,11 @@ Since **erna** is a cronjob-like service ensure that the app is scaled exactly o
 
 ### Schedule a custom event
 1. Run the command with a `schedule` subcommand:  
-`/<command> schedule <location> <yyyy-mm-dd> <hh:mm> [<title>]`
-    1. Get notified that something went wrong in case of failure.
-    1. Get notified about the scheduled event in case of success.
-    1. Get notified about an existing event at the same time in the same location.
+`/<command> schedule <YYYY-MM-DD> <HH:mm> [<title>]`
+    1. Get notified in case of an invalid format.
+    1. Get asked for the related location.
+      1. Get notified about the scheduled event in case of success.
+      1. Get notified about an existing event at the same time in the same location.
 
 ## Configuration
 The configuration is based on environment variables.
