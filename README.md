@@ -18,6 +18,7 @@
 1. [Storage Adapter ⇗](docs/storage-adapter.md)
 1. [Development](#development)
 1. [Contributing](#contributing)
+1. [Other Projects We Are Working On](#other-projects-we-are-working-on)
 1. [License](#license)
 
 ---
@@ -295,6 +296,12 @@ Fork this repository and push in your ideas.
 
 Would be awesome if you add corresponding tests.  
 For further information read the [contributing guideline](./CONTRIBUTING.md).
+
+## Other Projects We Are Working On
+🗞 &nbsp;[Tech Blog](https://medium.com/car2godevs)  
+🐦 &nbsp;[@car2godevs](https://twitter.com/car2godevs)  
+📚 &nbsp;[Our Tech Stack](https://stackshare.io/car2go)  
+💼 &nbsp;[Job Board](https://stackoverflow.com/jobs/companies/car2go)
 
 ## License
 The MIT License
