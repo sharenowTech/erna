@@ -2,7 +2,9 @@
 .idea
 .vscode
 .privates
-.env*
+.env
+.env.prod
+.env.dev
 
 ### Node ###
 # Logs
