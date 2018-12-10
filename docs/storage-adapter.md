@@ -14,7 +14,7 @@ Feel free to create new ones based on the instructions in section ['Add a Custom
 In best case choose a database which is also available as a free DBaaS tier: [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev#dbaas).
 
 #### InMemoryStorage
-The storage is default and initialized when passing no `DB` environment variable. Since it is a in-memory state which is not synced with other instances ensure that the service is deployed exactly once. Even freezing/sleeping of the service might cause a loss of data.
+The storage is default and initialized when passing no `DB` environment variable. Since it is a in-memory state which is not synced with a database ensure that the service is deployed exactly once.
 
 #### MongoStorage
 This storage adapts [MongoDB](https://www.mongodb.com) and is initialized when passing a `mongodb://` connection url to `DB` environment variable. There are free DBaaS solutions like [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
