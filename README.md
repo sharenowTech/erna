@@ -44,27 +44,9 @@ Feel free to contribute new storage providers or other features.
 Since **erna** is a cronjob-like service ensure that the app is scaled exactly once at a single datacenter.
 
 ## Flows
-### Sign up for date
-1. Run the command
-    1. Get notified when the bot matches people.
-    1. If there is just one location, sign up automatically
-1. Choose
-    1. Cancel signup process
-    1. Select Location and sign up
-1. Get notified with exact date/time of your match
-1. Get notified as soon as you matched
-    1. Conversation with bot and match partners is created
+### Sign up for date or update existing date
+![interaction flow](./assets/flow.png)
 
-### Update existing date
-1. Run the command again
-    1. Get notified that you aleady have signed up
-    1. Provide options based on count of locations
-1. Choose
-    1. Cancel date
-    1. Update date
-        1. just available if there are multiple locations
-        1. restart the signup process
-        1. it is not possible to cancel the update process
 
 ### Schedule a custom event
 1. Run the command with the `schedule` subcommand:  
