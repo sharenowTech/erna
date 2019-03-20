@@ -1,9 +1,10 @@
 ## Storage Adapter
 
-1. [Enable Available Storage Adapters](#enable-available-storage-adapters)
-    1. [InMemoryStorage](#inmemorystorage)
-    1. [MongoStorage](#MongoStorage)
-1. [Add a Custom Adapter](#add-a-custom-adapter)
+- [Storage Adapter](#storage-adapter)
+  - [Enable Available Storage Adapters](#enable-available-storage-adapters)
+    - [InMemoryStorage](#inmemorystorage)
+    - [MongoStorage](#mongostorage)
+  - [Add a Custom Adapter](#add-a-custom-adapter)
 
 --- 
 
@@ -141,3 +142,22 @@ The basic error handling for this functions is implemented in [`composeWrapper`]
   **Output:**  
   `Object` – List of scheduled events.
 
+- #### `async setSkip(user, datetime)`
+  If there is already a skip set at the same date, return the event. Otherwise set a skip.  
+  Additionally add all arguments as new document to another collection.
+
+  **Input:**  
+  `user <string>` – The userId of the slack user.  
+  `datetime <string>` – The datetime (UTC) as ISO string.
+
+  **Output:**  
+  `<object|undefined>` – The existing event with the same data or `undefined`.
+
+- #### `async listSkips()`
+  Get list of all set skips.  
+
+  **Input:**  
+  n/a
+
+  **Output:**  
+  `Object` – List of set skips in `YYYY-MM-DD HH:mm`.

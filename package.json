@@ -28,6 +28,10 @@
       "url": "https://raum.sh"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sharenowTech/erna.git"
+  },
   "license": "MIT",
   "dependencies": {
     "@slack/client": "^4.8.0",

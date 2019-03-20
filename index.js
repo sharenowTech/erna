@@ -14,6 +14,7 @@ process.on('unhandledRejection', console.error)
 
 async function init () {
   await storage.init()
+
   const app = express()
 
   app.set('json spaces', 2)
@@ -25,12 +26,15 @@ async function init () {
   app.post('/commands', gatekeeper.lock, middleware.async(handlers.commands))
   app.post('/actions', gatekeeper.lock, middleware.async(handlers.actions))
 
-  Object.keys(env.locations.tzs).forEach((tz) => {
+  Object.keys(env.locations.tzs).forEach(async (tz) => {
     const cronPattern = `${env.matchTime.cron} * * ${env.matchDay.raw}`
     const cron = new Cron(cronPattern, () => {}, null, true, tz)
 
-    scheduler.add(tz, cron)
+    await scheduler.add(tz, cron)
   })
+
+  const skips = await storage.listSkips()
+  skips.forEach(x => scheduler.remove(x))
 
   scheduler.ticker = new Cron('* * * * *', handlers.match, null, true, null, null, null, 0)
   app.listen(env.port, () => console.log('server listening'))
