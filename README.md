@@ -30,7 +30,7 @@ This [Slack](https://slack.com) [slash command](https://api.slack.com/slash-comm
 
 The basic idea behind **erna** is to enter a specific command, choose your current location and get your match at the defined time, day and week. In case of an odd number of applicants, there's one larger group. You get even notified in the unfortunate case of no match. But don't be sad – keep trying and tell your coworkers about the app 😉.
 
-While starting, **erna** generates up to 250 scheduled events per timezone which are enough for roughly 1-24 years. Additionally it is possible to schedule custom location-specific events via the subcommand `schedule`.
+While starting, **erna** generates up to 250 scheduled events per timezone which are enough for roughly 1-24 years. Additionally it is possible to schedule custom location-specific events via the subcommand `schedule` and to skip regularly scheduled events via `skip`.
 
 The app is optimized for [zeit now v1](https://zeit.co/now), so that it is possible to deploy the app with a few commands: 
 
@@ -55,6 +55,14 @@ Since **erna** is a cronjob-like service ensure that the app is scaled exactly o
     1. Get asked for the related location.
         1. Get notified about the scheduled event in case of success.
         1. Get notified about an existing event at the same time in the same location.
+
+### Skip a regular event
+1. Run the command with the `skip` subcommand:
+`/<command> skip <YYYY-MM-DD> <HH:mm>`
+  1. Get notified in case of an invalid format.
+  1. Get feedback
+     1. Get notified about the skip events at that date in case of success.
+     2. Get notified about an existing skip at the same date.
 
 ## Configuration
 The configuration is based on environment variables.
