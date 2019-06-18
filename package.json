@@ -34,6 +34,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@slack/bolt": "^1.2.0",
     "@slack/client": "^4.8.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",

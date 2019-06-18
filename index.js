@@ -1,43 +1,28 @@
 require('dotenv').config()
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const Cron = require('cron').CronJob
+const { App } = require('@slack/bolt')
 const env = require('./lib/env')
-const middleware = require('./lib/middleware')
-const handlers = require('./lib/handlers')
-const gatekeeper = require('./lib/gatekeeper')
-const scheduler = require('./lib/scheduler')
-const storage = require('./lib/storage')
+const blocks = require('./lib/blocks')
 
-process.on('unhandledRejection', console.error)
+const app = new App({
+  token: env.token,
+  signingSecret: env.secret
+})
 
-async function init () {
-  await storage.init()
-
-  const app = express()
-
-  app.set('json spaces', 2)
-  app.use(bodyParser.json({ verify: middleware.rawBody }))
-  app.use(bodyParser.urlencoded({ extended: true, verify: middleware.rawBody }))
-
-  app.get('/', (req, res) => res.json({ status: 'ok' }))
-  app.get('/schedule', middleware.async(handlers.schedule))
-  app.post('/commands', gatekeeper.lock, middleware.async(handlers.commands))
-  app.post('/actions', gatekeeper.lock, middleware.async(handlers.actions))
-
-  Object.keys(env.locations.tzs).forEach(async (tz) => {
-    const cronPattern = `${env.matchTime.cron} * * ${env.matchDay.raw}`
-    const cron = new Cron(cronPattern, () => {}, null, true, tz)
-
-    await scheduler.add(tz, cron)
+app.command('/erna', async ({ ack, say }) => {
+  ack()
+  say({
+    blocks: blocks.signup(true)
   })
+})
 
-  const skips = await storage.listSkips()
-  skips.forEach(x => scheduler.remove(x))
+app.action('signup', ({ ack, say }) => {
+  ack()
 
-  scheduler.ticker = new Cron('* * * * *', handlers.match, null, true, null, null, null, 0)
-  app.listen(env.port, () => console.log('server listening'))
-}
+  say('hi')
+});
 
-init()
+(async () => {
+  await app.start(env.port)
+  console.log(`⚡️ Bolt app is running on port ${env.port}.`)
+})()
