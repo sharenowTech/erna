@@ -35,7 +35,7 @@ While starting, **erna** generates up to 250 scheduled events per timezone which
 The app is optimized for [zeit now v1](https://zeit.co/now), so that it is possible to deploy the app with a few commands: 
 
 ```sh
-git clone https://github.com/car2go/erna.git
+git clone https://github.com/sharenowTech/erna.git
 cd erna
 now
 ```
