@@ -183,7 +183,7 @@ DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017
 ```
 
 ```sh
-git clone https://github.com/car2go/erna.git
+git clone https://github.com/sharenowTech/erna.git
 cd erna
 now
 ```
@@ -191,7 +191,7 @@ now
 or
 
 ```sh
-git clone https://github.com/car2go/erna.git
+git clone https://github.com/sharenowTech/erna.git
 cd erna
 now -E .env.erna.prod
 ```
