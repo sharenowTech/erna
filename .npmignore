@@ -4,6 +4,7 @@
 .privates
 .env
 assets/
+now.json
 
 ### Node ###
 # Logs

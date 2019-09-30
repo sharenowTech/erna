@@ -5,6 +5,7 @@
 .env
 .env.prod
 .env.dev
+now.json
 
 ### Node ###
 # Logs
