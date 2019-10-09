@@ -65,7 +65,8 @@ Since **erna** is a cronjob-like service ensure that the app is scaled exactly o
      2. Get notified about an existing skip at the same date.
 
 ### Notify all folks
-1. Run the command with the `notify` subcommand
+1. Run the command with the `notify` subcommand:
+`/<command> notify [<additional message>]`
 
 ## Configuration
 The configuration is based on environment variables.
