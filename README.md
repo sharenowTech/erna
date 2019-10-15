@@ -112,13 +112,22 @@ SECRET=12345abcdef67890
 
 ### `[DB=undefined]`
 
-Pass in a custom database url containing all information like credentials, clusters, replica set and further options. 
+Pass in a custom database url containing information like clusters, replica set and further options. 
 Default is no external database, so it uses an in-memory state instead.  
 Further information about the storage is listed in the [storage adapter chapters](docs/storage-adapter.md).
 
 Example:
 ```sh
-DB=mongodb://username:password@one.myinstance.com:27017,two.myinstance.com:27017?ssl=true&replicaSet=myCluster
+DB=mongodb://one.myinstance.com:27017,two.myinstance.com:27017?ssl=true&replicaSet=myCluster
+```
+
+### `[DB_CREDENTIALS=undefined]`
+
+Pass in database credentials in a `username:password` format.
+
+Example:
+```sh
+username:password
 ```
 
 ### `[PORT=3000]`
@@ -223,7 +232,7 @@ To simplify the local development and testing, read the [slack tutorial](https:/
 Basically it's enough to install [ngrok](https://ngrok.com/), run `npm start` in the repository and tunnel the port `ngrok http 3000`. Use the output temporary URL in the Slack app settings.
 
 ### Environment Validation & Configuration
-The validator (`./lib/env/validator.js`) is reponsible for handling and validating environment variables. The schema listed in `./lib/env/schema.js` defines which variables are required, what are their defaults, which regex pattern is required and how to transform the passed values.
+The validator (`./lib/env/validator.js`) is responsible for handling and validating environment variables. The schema listed in `./lib/env/schema.js` defines which variables are required, what are their defaults, which regex pattern is required and how to transform the passed values.
 
 Further details can be found in the [schema definition ⇗](docs/environment-config.md).
 
