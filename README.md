@@ -127,7 +127,23 @@ Pass in database credentials in a `username:password` format.
 
 Example:
 ```sh
-username:password
+DB_CREDENTIALS=username:password
+```
+
+### `[DB_NAME=erna]`
+Pass in the name of the database.
+
+Example:
+```sh
+DB_NAME=erna_local
+```
+
+### `[BOT_NAME=erna]`
+Pass in the username of the Slack bot user.
+
+Example:
+```sh
+BOT_NAME=chieflunchofficer
 ```
 
 ### `[PORT=3000]`
