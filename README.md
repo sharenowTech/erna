@@ -188,8 +188,8 @@ MATCH_DAY=TUE
 ```
 
 ### `[MATCH_INTERVAL=1,2,3,4,5]`
-Pass in a comma-separated list of week numbers per month matching the pattern `/^[1-5](,[1-5])?$/`.  
-It filters the generated events by week numbers. So passing `1,3` excludes all events scheduled in the second, fourth and fifth week of a month.
+Pass in a comma-separated list of week numbers per month matching the pattern `/^[0-5](,[0-5])?$/`.  
+It filters the generated events by week numbers. So passing `1,3` excludes all events scheduled in the second, fourth and fifth week of a month. Passing only `0` means that no regular events are scheduled.
 
 Example:
 ```sh
